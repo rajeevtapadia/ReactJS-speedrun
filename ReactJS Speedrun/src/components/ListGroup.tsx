@@ -1,10 +1,14 @@
 // return can only contain one element
-// to add multiple elements we use fragment
+// to add multiple elements we use fragment <> </>
+
+import { MouseEvent } from "react";
 
 const ListGroup = () => {
   let items = ["pune", "nagpur", "jalna", "bhosari"];
-    items = []
+  // items = [];
 
+  // event handler
+  const handleClick = (event: MouseEvent) => console.log(event);
 
   return (
     <>
@@ -12,7 +16,10 @@ const ListGroup = () => {
       {items.length === 0 && <p>No item found</p>}
       <ul className="list-group">
         {items.map((item) => (
-          <li key={item}>{item}</li>
+            // passing the ref not actually calling the function 
+          <li className="list-group-item" onClick={handleClick} key={item}>
+            {item}
+          </li>
         ))}
       </ul>
     </>
