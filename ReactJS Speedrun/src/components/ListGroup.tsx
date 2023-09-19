@@ -1,15 +1,16 @@
 // return can only contain one element
 // to add multiple elements we use fragment <> </>
 
-import { useState } from "react";
+import { useState, Key } from "react";
 
 // props
 interface Props {
-  heading: String;
-  items: String[];
+  heading: String,
+  items: String[],
+  onSelection: (item: String) => void,
 }
 
-const ListGroup = ({ items, heading }: Props) => {
+const ListGroup = ({ items, heading, onSelection }: Props) => {
   //   let items = ["pune", "nagpur", "jalna", "bhosari"];
   // items = [];
 
@@ -30,8 +31,9 @@ const ListGroup = ({ items, heading }: Props) => {
             // arrow function is passed in onClick
             onClick={() => {
               setSelected(index);
+              onSelection(item);
             }}
-            key={item}
+            key={item as Key}
           >
             {item}
           </li>
@@ -42,3 +44,11 @@ const ListGroup = ({ items, heading }: Props) => {
 };
 
 export default ListGroup;
+
+
+// useState flow
+// onClick listner applied on all li elements
+// a stateful value selected is created
+// everytime user clicks on box: 
+    // stateful value = index of clicked box
+// re-render is triggered
