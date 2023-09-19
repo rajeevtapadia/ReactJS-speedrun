@@ -1,18 +1,24 @@
 // return can only contain one element
 // to add multiple elements we use fragment <> </>
 
-import { MouseEvent, useState } from "react";
+import { useState } from "react";
 
-const ListGroup = () => {
-  let items = ["pune", "nagpur", "jalna", "bhosari"];
+// props
+interface Props {
+  heading: String;
+  items: String[];
+}
+
+const ListGroup = ({ items, heading }: Props) => {
+  //   let items = ["pune", "nagpur", "jalna", "bhosari"];
   // items = [];
 
   // hooks
-  const [selected, setSelected] = useState(-1)
+  const [selected, setSelected] = useState(-1);
 
   return (
     <>
-      <h1>List</h1>
+      <h1>{heading}</h1>
       {items.length === 0 && <p>No item found</p>}
       <ul className="list-group">
         {items.map((item, index) => (
@@ -22,7 +28,9 @@ const ListGroup = () => {
               index === selected ? "list-group-item active" : " list-group-item"
             }
             // arrow function is passed in onClick
-            onClick={() => {setSelected(index)}}
+            onClick={() => {
+              setSelected(index);
+            }}
             key={item}
           >
             {item}
