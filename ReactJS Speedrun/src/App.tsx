@@ -1,7 +1,7 @@
 import ListGroup from "./components/ListGroup";
 import Alert from "./components/Alert";
 import Button from "./components/Button";
-import { createElement } from "react";
+import { createElement, useState } from "react";
 
 function App() {
   let items = ["pune", "nagpur", "jalna", "bhosari"];
@@ -10,6 +10,8 @@ function App() {
     console.log(item);
   };
   const doNothing = () => {};
+
+  const [visibility, setVisibility] = useState(false)
 
   return (
     <div>
@@ -20,9 +22,12 @@ function App() {
       </Alert>
       {/* <ListGroup items={items} heading='cities' onSelection={handleSelectedItem}/>
       <ListGroup heading='second list' items={['i', 'am', 'god']} onSelection={doNothing}/> */}
+      {visibility && <Alert onClose={() => {setVisibility(false)}}>new alert</Alert>}
       <Button
         text="press and see if something happens"
-        addOnClick={() => console.log("lol nothing happens")}
+        addOnClick={() => {
+            setVisibility(true)
+        }}
         color='danger'
       />
     </div>
