@@ -1,5 +1,7 @@
 import ListGroup from "./components/ListGroup";
 import Alert from "./components/Alert";
+import Button from "./components/Button";
+import { createElement } from "react";
 
 function App() {
   let items = ["pune", "nagpur", "jalna", "bhosari"];
@@ -16,8 +18,13 @@ function App() {
         <h1>Hello world</h1>
         <div>lolfuck</div>
       </Alert>
-      <ListGroup items={items} heading='cities' onSelection={handleSelectedItem}/>
-      <ListGroup heading='second list' items={['i', 'am', 'god']} onSelection={doNothing}/>
+      {/* <ListGroup items={items} heading='cities' onSelection={handleSelectedItem}/>
+      <ListGroup heading='second list' items={['i', 'am', 'god']} onSelection={doNothing}/> */}
+      <Button
+        text="press and see if something happens"
+        addOnClick={() => console.log("lol nothing happens")}
+        color='danger'
+      />
     </div>
   );
 }
