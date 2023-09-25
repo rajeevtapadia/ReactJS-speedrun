@@ -6,7 +6,7 @@ interface Props {
 }
 
 const Alert = ({ children, onClose }: Props) => {
-  // console.log(children);
+  console.log(children);
 
   return (
     <div className="alert alert-warning alert-dismissible fade show" role="alert">

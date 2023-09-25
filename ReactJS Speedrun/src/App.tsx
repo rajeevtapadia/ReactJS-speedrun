@@ -1,6 +1,7 @@
 import ListGroup from "./components/ListGroup";
 import Alert from "./components/Alert";
 import Button from "./components/Button";
+import Clock from "./components/Clock";
 import { createElement, useState } from "react";
 
 function App() {
@@ -11,25 +12,35 @@ function App() {
   };
   const doNothing = () => {};
 
-  const [visibility, setVisibility] = useState(false)
+  const [visibility, setVisibility] = useState(false);
 
   return (
     <div>
-      <Alert>
+      <Alert onClose={() => {}}>
         {/* this content is recieved to parent as prop named children */}
         <h1>Hello world</h1>
         <div>lolfuck</div>
       </Alert>
       {/* <ListGroup items={items} heading='cities' onSelection={handleSelectedItem}/>
       <ListGroup heading='second list' items={['i', 'am', 'god']} onSelection={doNothing}/> */}
-      {visibility && <Alert onClose={() => {setVisibility(false)}}>new alert</Alert>}
+      {visibility && (
+        <Alert
+          onClose={() => {
+            setVisibility(false);
+          }}
+        >
+          new alert
+        </Alert>
+      )}
       <Button
         text="press and see if something happens"
         addOnClick={() => {
-            setVisibility(true)
+          setVisibility(true);
         }}
-        color='danger'
+        color="danger"
       />
+
+      <Clock/>
     </div>
   );
 }
