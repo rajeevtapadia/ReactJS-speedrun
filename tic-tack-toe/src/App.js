@@ -1,10 +1,12 @@
-import './App.css';
+import "./App.css";
+import Board from "./Components/Board";
 
 function App() {
   return (
-    <div>
-      tick tack toe lol
-    </div>
+    <>
+      <div>tick tack toe lol</div>
+      <Board />
+    </>
   );
 }
 
