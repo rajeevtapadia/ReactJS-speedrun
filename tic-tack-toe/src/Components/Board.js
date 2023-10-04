@@ -3,7 +3,7 @@ import Box from "./Box";
 import 'bootstrap/dist/css/bootstrap.css';
 import "./Board.css";
 
-const Board = () => {
+const Board = ({ setWinner, winner }) => {
   const [boardState, setBoard] = useState(['', '', '', '', '', '', '', '', ''])
   const [turn, setTurn] = useState(0)
   const [counter, setCounter] = useState(0)
@@ -17,10 +17,11 @@ const Board = () => {
     for(let i = 0; i < 9; i++){
       boxes[i].innerText = ''
     }
+//    setWinner('')
   }
   function handleClick(event, index){
 //    if box is empty fill it with correct symbol
-    if(boardState[index] === ''){
+    if(boardState[index] === '' && winner === ''){
       const current = turn === 0 ? 'O' : 'X'
       event.target.innerText = current
       boardState[index] = current
@@ -29,8 +30,12 @@ const Board = () => {
       checkWin(current)
     }
 //    if board is full reset
-      if(counter === 9){
-        resetBoard()
+      if(counter === 8){
+        setWinner("Tie")
+        setTimeout(() => {
+          setWinner('')
+          resetBoard()
+        }, 2000)
       }
   }
 
@@ -59,8 +64,11 @@ const Board = () => {
   function checkWin(winner){
     if(checkRow() || checkCol() || checkDiag()){
       console.log('bim bim bam bam', winner)
-      alert(`${winner} is winner`)
-//      resetBoard()
+      setWinner(winner)
+      setTimeout(() => {
+        setWinner('')
+        resetBoard()
+      }, 2000)
     }
   }
 

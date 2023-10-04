@@ -1,21 +1,28 @@
 :root{
-    --box-border: #0E8388
+    --box-border: #0E8388;
+    --light-green: #CBE4DE;
 }
 body{
     background-color: #2C3333;
+}
+.content{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 97vh;
 }
 div.board>div{
     display: flex;
     align-items: center;
     justify-content: center;
     font-size: 100px;
-    color: #CBE4DE;
+    color: var(--light-green);
 }
 .wrapper{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 97vh;
+/*    display: flex;*/
+/*    justify-content: center;*/
+/*    align-items: center;*/
+/*    height: 97vh;*/
 }
 .board{
     display: grid;
@@ -36,4 +43,12 @@ div.board>div{
     top: 3vh;
     right: 3vw;
     font-size: 20px
+}
+.result{
+    position: absolute;
+    color: var(--light-green);
+    bottom: 5vh;
+    font-size: 50px;
+    margin-left: auto;
+    margin-right: auto;
 }
