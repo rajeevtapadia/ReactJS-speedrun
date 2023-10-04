@@ -1,6 +1,6 @@
 import React, {useRef, useState} from "react";
 import "./Board.css";
-import {logRoles} from "@testing-library/react";
+import Box from "./Box";
 
 const Board = () => {
   const [boardState, setBoard] = useState(['', '', '', '', '', '', '', '', ''])
@@ -25,7 +25,7 @@ const Board = () => {
       boardState[index] = current
       setTurn(turn === 0 ? 1 : 0)
       setCounter(counter+1)
-      checkWin()
+      checkWin(current)
     }
 //    if board is full reset
       if(counter === 9){
@@ -55,25 +55,34 @@ const Board = () => {
       boardState[2] !== '' && boardState[4] && boardState[6];
   }
 
-  function checkWin(){
-    if(checkRow() || checkCol() || checkDiag()){
-      console.log('bim bim bam bam')
-      resetBoard()
-    }
+//  function checkWin(){
+//    if(checkRow() || checkCol() || checkDiag()){
+//      console.log('bim bim bam bam')
+////      resetBoard()
+//    }
+//  }
+
+  function checkWin(winner){
+    if (checkRow())
+      console.log('row', winner)
+    else if(checkCol())
+      console.log('col', winner)
+    else if(checkDiag())
+      console.log('diag', winner)
   }
 
   return (
     <div className="wrapper">
       <div className="board" ref={boardRef}>
-        <div onClick={(e) => {handleClick(e, 0)}} className=""></div>
-        <div onClick={(e) => {handleClick(e, 1)}} className="left"></div>
-        <div onClick={(e) => {handleClick(e, 2)}} className="left"></div>
-        <div onClick={(e) => {handleClick(e, 3)}} className="up"></div>
-        <div onClick={(e) => {handleClick(e, 4)}} className="left up"></div>
-        <div onClick={(e) => {handleClick(e, 5)}} className="left up"></div>
-        <div onClick={(e) => {handleClick(e, 6)}} className="up"></div>
-        <div onClick={(e) => {handleClick(e, 7)}} className="left up"></div>
-        <div onClick={(e) => {handleClick(e, 8)}} className="left up"></div>
+        <Box handleClick={(e) => {handleClick(e, 0)}} classs=""/>
+        <Box handleClick={(e) => {handleClick(e, 1)}} classs="left"/>
+        <Box handleClick={(e) => {handleClick(e, 2)}} classs="left"/>
+        <Box handleClick={(e) => {handleClick(e, 3)}} classs="up"/>
+        <Box handleClick={(e) => {handleClick(e, 4)}} classs="left up"/>
+        <Box handleClick={(e) => {handleClick(e, 5)}} classs="left up"/>
+        <Box handleClick={(e) => {handleClick(e, 6)}} classs="up"/>
+        <Box handleClick={(e) => {handleClick(e, 7)}} classs="left up"/>
+        <Box handleClick={(e) => {handleClick(e, 8)}} classs="left up"/>
       </div>
     </div>
   );
