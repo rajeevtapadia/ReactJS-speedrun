@@ -51,8 +51,8 @@ const Board = () => {
   }
 
   function checkDiag(){
-    return boardState[0] !== '' && boardState[4] && boardState[8] ||
-      boardState[2] !== '' && boardState[4] && boardState[6];
+    return boardState[0] !== '' && boardState[4] === boardState[0] && boardState[8] === boardState[0] ||
+      boardState[2] !== '' && boardState[4] === boardState[2] && boardState[6] === boardState[2];
   }
 
 //  function checkWin(){
