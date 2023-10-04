@@ -1,6 +1,7 @@
 import React, {useRef, useState} from "react";
-import "./Board.css";
 import Box from "./Box";
+import 'bootstrap/dist/css/bootstrap.css';
+import "./Board.css";
 
 const Board = () => {
   const [boardState, setBoard] = useState(['', '', '', '', '', '', '', '', ''])
@@ -55,14 +56,15 @@ const Board = () => {
       boardState[2] !== '' && boardState[4] === boardState[2] && boardState[6] === boardState[2];
   }
 
-//  function checkWin(){
-//    if(checkRow() || checkCol() || checkDiag()){
-//      console.log('bim bim bam bam')
-////      resetBoard()
-//    }
-//  }
-
   function checkWin(winner){
+    if(checkRow() || checkCol() || checkDiag()){
+      console.log('bim bim bam bam', winner)
+      alert(`${winner} is winner`)
+//      resetBoard()
+    }
+  }
+
+  function checkWinDebug(winner){
     if (checkRow())
       console.log('row', winner)
     else if(checkCol())
@@ -83,6 +85,7 @@ const Board = () => {
         <Box handleClick={(e) => {handleClick(e, 6)}} classs="up"/>
         <Box handleClick={(e) => {handleClick(e, 7)}} classs="left up"/>
         <Box handleClick={(e) => {handleClick(e, 8)}} classs="left up"/>
+        <button className='reset btn' onClick={resetBoard}>Reset</button>
       </div>
     </div>
   );
