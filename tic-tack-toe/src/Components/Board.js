@@ -1,5 +1,6 @@
 import React, {useRef, useState} from "react";
 import "./Board.css";
+import {logRoles} from "@testing-library/react";
 
 const Board = () => {
   const [boardState, setBoard] = useState(['', '', '', '', '', '', '', '', ''])
@@ -17,17 +18,50 @@ const Board = () => {
     }
   }
   function handleClick(event, index){
+//    if box is empty fill it with correct symbol
     if(boardState[index] === ''){
       const current = turn === 0 ? 'O' : 'X'
       event.target.innerText = current
       boardState[index] = current
       setTurn(turn === 0 ? 1 : 0)
       setCounter(counter+1)
+      checkWin()
     }
+//    if board is full reset
       if(counter === 9){
         resetBoard()
       }
   }
+
+//  handle win cases
+  function checkRow(){
+    for(let i = 0; i < 9; i+=3){
+      if(boardState[i] !== '' && boardState[i] === boardState[i+1] && boardState[i] === boardState[i+2])
+        return true;
+    }
+    return false;
+  }
+
+  function checkCol(){
+    for(let i = 0; i < 3; i++){
+      if(boardState[i] !== '' && boardState[i] === boardState[i+3] && boardState[i] === boardState[i+6])
+        return true;
+    }
+    return false;
+  }
+
+  function checkDiag(){
+    return boardState[0] !== '' && boardState[4] && boardState[8] ||
+      boardState[2] !== '' && boardState[4] && boardState[6];
+  }
+
+  function checkWin(){
+    if(checkRow() || checkCol() || checkDiag()){
+      console.log('bim bim bam bam')
+      resetBoard()
+    }
+  }
+
   return (
     <div className="wrapper">
       <div className="board" ref={boardRef}>
