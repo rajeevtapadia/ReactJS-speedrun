@@ -9,8 +9,15 @@ import {
   MDBBtn,
   MDBInput,
 } from "mdb-react-ui-kit";
+import {
+  signInWithEmailAndPassword,
+  createUserWithEmailAndPassword,
+} from "firebase/auth";
+import { auth } from "../firebase";
 
-const LoginPage = () => {
+const LoginPage = ({ setUser }) => {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
   const [justifyActive, setJustifyActive] = useState("tab1");
 
   const handleJustifyClick = (value) => {
@@ -20,6 +27,24 @@ const LoginPage = () => {
 
     setJustifyActive(value);
   };
+
+  function signupHandler() {
+    createUserWithEmailAndPassword(auth, email, password)
+      .then((user) => {
+        setUser(user.user);
+        console.log(user.user.email);
+      })
+      .catch((err) => console.log(err));
+  }
+
+  function loginHandler() {
+    signInWithEmailAndPassword(auth, email, password)
+      .then((user) => {
+        setUser(user.user);
+        console.log(user.user.email);
+      })
+      .catch((err) => console.log(err));
+  }
 
   return (
     <MDBContainer className="p-3 my-5 d-flex flex-column w-80">
@@ -53,26 +78,59 @@ const LoginPage = () => {
             label="Email address"
             id="form1"
             type="email"
+            onChange={(e) => {
+              setEmail(e.target.value);
+            }}
           />
           <MDBInput
             wrapperClass="mb-4"
             label="Password"
             id="form2"
             type="password"
+            onChange={(e) => {
+              setPassword(e.target.value);
+            }}
           />
-          <MDBBtn className="mb-4 w-100">Sign in</MDBBtn>
+          <MDBBtn
+            className="mb-4 w-100"
+            onClick={(e) => {
+              e.preventDefault();
+              loginHandler();
+            }}
+          >
+            Sign in
+          </MDBBtn>
         </MDBTabsPane>
 
         <MDBTabsPane show={justifyActive === "tab2"}>
-          <MDBInput wrapperClass="mb-4" label="Name" id="form1" type="text" />
-          <MDBInput wrapperClass="mb-4" label="Email" id="form1" type="email" />
+          {/* <MDBInput wrapperClass="mb-4" label="Name" id="form1" type="text" /> */}
           <MDBInput
             wrapperClass="mb-4"
+            label="Email"
+            id="form1"
+            type="email"
+            onChange={(e) => {
+              setEmail(e.target.value);
+            }}
+          />
+          <MDBInput
+            wrapperClass="dmb-4"
             label="Password"
             id="form1"
             type="password"
+            onChange={(e) => {
+              setPassword(e.target.value);
+            }}
           />
-          <MDBBtn className="mb-4 w-100">Sign up</MDBBtn>
+          <MDBBtn
+            className="mb-4 w-100"
+            onClick={(e) => {
+              e.preventDefault();
+              signupHandler();
+            }}
+          >
+            Sign up
+          </MDBBtn>
         </MDBTabsPane>
       </MDBTabsContent>
     </MDBContainer>

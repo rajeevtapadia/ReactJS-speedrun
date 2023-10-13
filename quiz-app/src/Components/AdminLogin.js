@@ -4,14 +4,20 @@ import {
   signInWithEmailAndPassword,
   createUserWithEmailAndPassword,
 } from "firebase/auth";
+import { auth } from "../firebase";
 import LoginPage from "./LoginPage.js";
 
-function App() {
+function AdminLogin() {
+  const [admin, setAdmin] = useState("");
+  function signupHandler() {}
+
+  function loginHandler() {}
+
   return (
     <>
-      <LoginPage />
+      <LoginPage setUser={setAdmin} />
     </>
   );
 }
 
-export default App;
+export default AdminLogin;
