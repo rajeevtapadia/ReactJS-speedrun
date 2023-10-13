@@ -1,12 +1,17 @@
+import React, { useState } from "react";
 import "../assets/AdminLogin.css";
+import {
+  signInWithEmailAndPassword,
+  createUserWithEmailAndPassword,
+} from "firebase/auth";
+import LoginPage from "./LoginPage.js";
 
-export default function AdminLogin() {
+function App() {
   return (
     <>
-        <p>Admin login</p>
-        <input placeholder={"username"} type={"text"}></input>
-        <input placeholder={"password"} type={"password"}></input>
-        <button className="btn" type="submit">submit</button>
+      <LoginPage />
     </>
   );
 }
+
+export default App;

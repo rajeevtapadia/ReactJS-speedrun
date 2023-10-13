@@ -1,12 +1,10 @@
 import "../assets/AdminLogin.css";
+import LoginPage from "./LoginPage";
 
 export default function UserLogin() {
   return (
     <>
-        <p>User login</p>
-        <input placeholder={"username"} type={"text"}></input>
-        <input placeholder={"password"} type={"password"}></input>
-        <button type="submit">submit</button>
+      <LoginPage />
     </>
   );
 }
