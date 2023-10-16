@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import {
   MDBContainer,
   MDBTabs,
@@ -19,6 +20,7 @@ const LoginPage = ({ setUser }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [justifyActive, setJustifyActive] = useState("tab1");
+  const navigate = useNavigate();
 
   const handleJustifyClick = (value) => {
     if (value === justifyActive) {
@@ -33,6 +35,7 @@ const LoginPage = ({ setUser }) => {
       .then((user) => {
         setUser(user.user);
         console.log(user.user.email);
+        navigate("/admin/dashboard");
       })
       .catch((err) => console.log(err));
   }
@@ -41,7 +44,8 @@ const LoginPage = ({ setUser }) => {
     signInWithEmailAndPassword(auth, email, password)
       .then((user) => {
         setUser(user.user);
-        console.log(user.user.email);
+        console.log("logged in as", user.user.email);
+        navigate("/admin/dashboard");
       })
       .catch((err) => console.log(err));
   }

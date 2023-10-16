@@ -3,6 +3,7 @@ import './assets/App.css';
 import Home from './Components/Home.js';
 import AdminLogin from './Components/AdminLogin.js'
 import UserLogin from './Components/UserLogin.js'
+import AdminDash from './Components/AdminDash';
 
 function App() {
   return (
@@ -11,6 +12,7 @@ function App() {
         <Routes>
           <Route exact path='/' element={<Home/>}/>
           <Route path='/admin/auth' element={<AdminLogin/>}></Route>
+          <Route path='/admin/dashboard' element={<AdminDash/>}></Route>
           <Route path='/user/auth' element={<UserLogin/>}></Route>
         </Routes>
       </BrowserRouter>
