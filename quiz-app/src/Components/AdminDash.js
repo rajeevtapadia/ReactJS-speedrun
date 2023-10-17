@@ -1,4 +1,6 @@
 import React from "react";
+import SetQuestion from "./SetQuestion";
+import { Link } from "react-router-dom";
 
 const AdminDash = () => {
   const quizes = [
@@ -19,7 +21,7 @@ const AdminDash = () => {
   return (
     <>
       <div>Admin Dashboard</div>
-      <button className="btn btn-primary">Create Quiz</button>
+      <button className="btn btn-primary"><Link to={'/admin/create-quiz'}>Create Quiz</Link></button>
 
       <table>
         <tr>
@@ -30,6 +32,7 @@ const AdminDash = () => {
         </tr>
         {table}
       </table>
+      <SetQuestion/>
     </>
   );
 };
