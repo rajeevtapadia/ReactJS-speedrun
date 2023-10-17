@@ -14,13 +14,15 @@ import {
   signInWithEmailAndPassword,
   createUserWithEmailAndPassword,
 } from "firebase/auth";
-import { auth } from "../firebase";
+import { auth, db } from "../firebase";
+import { setDoc, doc, Firestore, collection, addDoc } from "firebase/firestore";
 
 const LoginPage = ({ setUser }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [justifyActive, setJustifyActive] = useState("tab1");
   const navigate = useNavigate();
+  const [error, setError] = useState("");
 
   const handleJustifyClick = (value) => {
     if (value === justifyActive) {
@@ -30,14 +32,27 @@ const LoginPage = ({ setUser }) => {
     setJustifyActive(value);
   };
 
+  const addAdmin = async (user) => {
+    const adminCollec = collection(db, "Admins");
+    const newAdmin = await addDoc(adminCollec, {
+      email: user.user.email,
+      quizs: [],
+    });
+    console.log(newAdmin);
+  };
+
   function signupHandler() {
     createUserWithEmailAndPassword(auth, email, password)
       .then((user) => {
         setUser(user.user);
         console.log(user.user.email);
+        addAdmin(user);
         navigate("/admin/dashboard");
       })
-      .catch((err) => console.log(err));
+      .catch((err) => {
+        console.log(err);
+        setError(err.code)
+      });
   }
 
   function loginHandler() {
@@ -126,6 +141,7 @@ const LoginPage = ({ setUser }) => {
               setPassword(e.target.value);
             }}
           />
+          {error && <p className="text-red-500">error: {error}</p>}
           <MDBBtn
             className="mb-4 w-100"
             onClick={(e) => {

@@ -8,7 +8,7 @@ const AdminDash = () => {
   ];
 
   const table = quizes.map((quiz) => (
-    <tr>
+    <tr key={quiz.no}>
       <td>{quiz.no}</td>
       <td>{quiz.name}</td>
       <td>{quiz.attempts}</td>
