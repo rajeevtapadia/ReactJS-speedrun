@@ -1,5 +1,4 @@
 import React from "react";
-import SetQuestion from "./SetQuestion";
 import { Link } from "react-router-dom";
 
 const AdminDash = () => {
@@ -32,7 +31,6 @@ const AdminDash = () => {
         </tr>
         {table}
       </table>
-      <SetQuestion/>
     </>
   );
 };

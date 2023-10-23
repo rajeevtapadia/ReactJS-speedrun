@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 import SetQuestion from "./SetQuestion";
+import { collection, addDoc } from "firebase/firestore"
+import { db } from '../firebase'
 
 const CreateQuiz = () => {
   const [quizName, setQuizName] = useState("");
@@ -15,7 +17,11 @@ const CreateQuiz = () => {
     );
   }
 
-  function createQuiz() {}
+  const createQuiz = async () => {
+    const adminRef = collection(db, "Admins")
+    const res = await addDoc(adminRef, {q1: "question1"})
+    console.log(res);
+  }
 
   return (
     <div className="flex flex-col space-y-4">
