@@ -28,23 +28,24 @@ const LoginPage = ({ setUser }) => {
     if (value === justifyActive) {
       return;
     }
-
     setJustifyActive(value);
   };
 
   const addAdmin = async (user) => {
-    const adminCollec = collection(db, "Admins");
-    const newAdmin = await addDoc(adminCollec, {
-      email: user.user.email,
-      quizs: [],
-    });
-    console.log(newAdmin);
+    try{
+      setDoc(doc(db, "Admins", user.user.email), {
+        email: user.user.email,
+        quizs: [],
+      });
+    }catch (e){
+      console.log('error in addAdmin', e)
+    }
   };
 
   function signupHandler() {
     createUserWithEmailAndPassword(auth, email, password)
       .then((user) => {
-        setUser(user.user);
+        setUser(user.user.email);
         console.log(user.user.email);
         addAdmin(user);
         navigate("/admin/dashboard");
@@ -58,7 +59,7 @@ const LoginPage = ({ setUser }) => {
   function loginHandler() {
     signInWithEmailAndPassword(auth, email, password)
       .then((user) => {
-        setUser(user.user);
+        setUser(user.user.email);
         console.log("logged in as", user.user.email);
         navigate("/admin/dashboard");
       })
