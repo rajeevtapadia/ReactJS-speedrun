@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-const AdminDash = () => {
+const AdminDash = ({ admin }) => {
   const quizes = [
     { no: 1, name: "quiz1", attempts: 2, code: "qoieut" },
     { no: 2, name: "quiz1", attempts: 2, code: "qoieut" },
@@ -20,7 +20,9 @@ const AdminDash = () => {
   return (
     <>
       <div>Admin Dashboard</div>
-      <button className="btn btn-primary"><Link to={'/admin/create-quiz'}>Create Quiz</Link></button>
+      <button className="btn btn-primary">
+        <Link to={"/admin/create-quiz"}>Create Quiz</Link>
+      </button>
 
       <table>
         <tr>

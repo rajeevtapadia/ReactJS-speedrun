@@ -32,13 +32,13 @@ const LoginPage = ({ setUser }) => {
   };
 
   const addAdmin = async (user) => {
-    try{
-      setDoc(doc(db, "Admins", user.user.email), {
+    try {
+      await setDoc(doc(db, "Admins", user.user.email), {
         email: user.user.email,
         quizs: [],
       });
-    }catch (e){
-      console.log('error in addAdmin', e)
+    } catch (e) {
+      console.log("error in addAdmin", e);
     }
   };
 
@@ -52,7 +52,7 @@ const LoginPage = ({ setUser }) => {
       })
       .catch((err) => {
         console.log(err);
-        setError(err.code)
+        setError(err.code);
       });
   }
 
