@@ -39,7 +39,7 @@ const CreateQuiz = ({ admin }) => {
   const createQuizHandler = async () => {
     const data = getFormData();
     const adminRef = collection(db, `Admins/${admin}/Quizes`);
-    const res = await addDoc(adminRef, { quiz: data });
+    const res = await addDoc(adminRef, { quizName: quizName, noOfQue: queNo, quiz: data });
     console.log(res);
   };
 
