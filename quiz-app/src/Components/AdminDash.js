@@ -4,30 +4,32 @@ import { db } from "../firebase";
 import { getDocs, collection } from "firebase/firestore";
 
 const AdminDash = ({ admin }) => {
-  const [quizTable, setQuizTable] = useState(null)
+  const [quizTable, setQuizTable] = useState(null);
+
   useEffect(() => {
     const fetchQuizes = async () => {
-      const quizes = [];
-      const docs = await getDocs(collection(db, `Admins/${admin}/Quizes`));
-      let index = 1;
-      docs.forEach((doc) => {
-        quizes.push({ id: index++, name: doc.data().quizName });
-      });
+      const quizes = []
+      let i = 1;
+      const quizQuery = await getDocs(collection(db, `Admins/${admin}/Quizes`));
+
+      for(const quiz of quizQuery.docs){
+        const attempterQuery = await getDocs(collection(db, `Admins/${admin}/Quizes/${quiz.id}/Attempters`))
+        quizes.push({no: i++, name:quiz.data().quizName, attempts: attempterQuery.size, code: quiz.id})
+      }
       return quizes;
-    };
-    fetchQuizes().then((quizes) => {
-      const table = quizes.map((quiz) => (
-        <tr key={quiz.id}>
-          <td>{quiz.id}</td>
-          <td>{quiz.name}</td>
-          {/*<td>{quiz.attempts}</td>*/}
-          {/*<td>{quiz.code}</td>*/}
+    }
+    fetchQuizes().then(quizes => {
+      const table = quizes.map(quiz =>
+        <tr>
+          <td className='border border-grey-800 text-center'>{quiz.no}</td>
+          <td className='border border-grey-800 text-center'>{quiz.name}</td>
+          <td className='border border-grey-800 text-center'>{quiz.attempts}</td>
+          <td className='border border-grey-800 text-center'>{quiz.code}</td>
         </tr>
-      ));
-    console.log(table);
-    setQuizTable(table);
-    });
-  }, []);
+      )
+      setQuizTable(table)
+    }).catch(error => console.log('error creating table', error))
+  }, [admin])
 
   return (
     <>
@@ -36,14 +38,18 @@ const AdminDash = ({ admin }) => {
         <button className="btn btn-primary">
           <Link to={"/admin/create-quiz"}>Create Quiz</Link>
         </button>
-        <table>
+        <table className='border-collapse'>
+          <thead>
           <tr>
-            <th>Sr No</th>
-            <th>Quiz Name</th>
-            <th>No of Attempts</th>
-            <th>Quiz Code</th>
+            <th className='border border-grey-800 text-center'>Sr No</th>
+            <th className='border border-grey-800 text-center'>Quiz Name</th>
+            <th className='border border-grey-800 text-center'>No of Attempts</th>
+            <th className='border border-grey-800 text-center'>Quiz Code</th>
           </tr>
-          {quizTable}
+          </thead>
+          <tbody>
+           {quizTable}
+          </tbody>
         </table>
       </div>
     </>

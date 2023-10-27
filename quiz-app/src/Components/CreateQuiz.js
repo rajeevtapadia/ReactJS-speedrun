@@ -2,11 +2,13 @@ import React, { useState, useRef } from "react";
 import SetQuestion from "./SetQuestion";
 import { collection, addDoc } from "firebase/firestore";
 import { db } from "../firebase";
+import {useNavigate} from 'react-router-dom'
 
 const CreateQuiz = ({ admin }) => {
   const [quizName, setQuizName] = useState("");
   const [queNo, setQueNo] = useState(0);
   const formRef = useRef(null);
+  const navigate = useNavigate();
 
   const questions = [];
   for (let i = 0; i < queNo; i++) {
@@ -40,7 +42,7 @@ const CreateQuiz = ({ admin }) => {
     const data = getFormData();
     const adminRef = collection(db, `Admins/${admin}/Quizes`);
     const res = await addDoc(adminRef, { quizName: quizName, noOfQue: queNo, quiz: data });
-    console.log(res);
+    navigate('/admin/dashboard');
   };
 
   return (
