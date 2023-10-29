@@ -14,8 +14,8 @@ import {
   signInWithEmailAndPassword,
   createUserWithEmailAndPassword,
 } from "firebase/auth";
-import { auth, db } from "../firebase";
-import { setDoc, doc, Firestore, collection, addDoc } from "firebase/firestore";
+import { auth, db } from "../../firebase";
+import { setDoc, doc } from "firebase/firestore";
 
 const LoginPage = ({ setUser }) => {
   const [email, setEmail] = useState("");

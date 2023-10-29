@@ -1,5 +1,4 @@
-import React, { useState } from "react";
-import "../assets/AdminLogin.css";
+import "../../assets/AdminLogin.css";
 import LoginPage from "./LoginPage.js";
 
 function AdminLogin({ setAdmin }) {

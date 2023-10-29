@@ -1,7 +1,7 @@
 import React, { useState, useRef } from "react";
 import SetQuestion from "./SetQuestion";
 import { collection, addDoc } from "firebase/firestore";
-import { db } from "../firebase";
+import { db } from "../../firebase";
 import {useNavigate} from 'react-router-dom'
 
 const CreateQuiz = ({ admin }) => {

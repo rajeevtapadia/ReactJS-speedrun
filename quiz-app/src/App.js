@@ -2,10 +2,10 @@ import {useState} from 'react';
 import {BrowserRouter, Routes, Route } from 'react-router-dom'
 import './assets/App.css';
 import Home from './Components/Home.js';
-import AdminLogin from './Components/AdminLogin.js'
-import UserLogin from './Components/UserLogin.js'
-import AdminDash from './Components/AdminDash';
-import CreateQuiz from './Components/CreateQuiz';
+import AdminLogin from './Components/Admin/AdminLogin.js'
+import UserLogin from './Components/User/UserLogin.js'
+import AdminDash from './Components/Admin/AdminDash';
+import CreateQuiz from './Components/Admin/CreateQuiz';
 
 function App() {
   const [admin, setAdmin] = useState("");
